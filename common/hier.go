@@ -5,9 +5,10 @@ import (
 	git "github.com/libgit2/git2go"
 )
 
+const HierBranchPrefix string = "refs/hier"
+
 type AppData struct {
 	Repo *git.Repository
-	TicketBranch *git.Branch
 }
 
 func OpenRepo(path string) (*AppData, error) {

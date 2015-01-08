@@ -1,0 +1,44 @@
+// -*- mode: adoc -*-
+== Intro
+
+
+This file contains the format of the data that Hier stores in git.
+
+== Branches
+
+All branches have names that start with `@hier/`; different data types
+are stored under each branch.  Right now, two such branches are
+defined `@hier/tickets` and `@hier/wiki`
+
+=== `@hier/tickets`
+
+The tickets branch contains one directory for each ticket, with each
+change to the ticket represented as a new file in the directory. Each
+such file is a binary-encoded `TicketArtifact` message. The name of
+each such file is the hex-encoded SHA-1 digest of the contents of the
+file. The directory gets its name from the initial artifact for the
+ticket. (e.g., if the initial artifact for a ticket has SHA1 digest
+`f1d2d2f924e986ac86fdf7b36c94bcdf32beec15`, it gets added to the
+repository as
+`f1d2d2f924e986ac86fdf7b36c94bcdf32beec15/f1d2d2f924e986ac86fdf7b36c94bcdf32beec15`)
+
+There may also exist a directory in `@hier/tickets` named "config";
+containing the Hier ticketing system's configuration. This consists of
+the following files:
+
+types:: A newline-separated list of ticket types
+statuses:: A newline-separated list of ticket statuses. Each line may
+  optionally be split into two parts ("state" and "resolution") by a
+  single `:`; if so, the status MAY NOT appear on a line by
+  itself. (e.g. if the status "Closed:Fixed" appears in the list,
+  "Closed" may not appear on its own.)
+resolve_status:: Contains a script to resolve conflicting statuses, in
+  an as-yet-undetermined scripting language.
+
+WARNING: TODO: Define which language is used to resolve conflicts.
+
+=== `@hier/wiki`
+
+Contains Wiki content. Each page is formatted using AsciiDoc.
+
+

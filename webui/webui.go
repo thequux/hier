@@ -1,6 +1,7 @@
 package webui
 
 import (
+	"fmt"
 	"github.com/codegangsta/cli"
 	"github.com/gin-gonic/gin"
 	"github.com/thequux/hier/common"
@@ -20,10 +21,12 @@ func Run(ctx *cli.Context) {
 	var app WebApp
 	var err error
 	app.App, err = common.OpenRepo(ctx.Args().First())
+	fmt.Print(app.App.TicketBranch())
 	if err != nil {
 		panic(err)
 	}
 	_ = app
+
 	
 	println("Running!")
 	r := gin.Default()

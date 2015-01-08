@@ -4,8 +4,12 @@ message TicketArtifact {
   optional string title = 1;
   // The hashes of all tips of the artifact DAG when this artifact was written
   repeated bytes after = 2;
+
+  // Only relevant for the first artifact in a ticket.
   optional string type = 3;
+
   optional string status = 4;
+  
   // Markdown-formatted
   optional string message = 5;
   required string author = 6;
