@@ -1,0 +1,35 @@
+== Hier: Hosting In Every Repo
+
+Hier adds fossil-style project management integrated into a git repo,
+so that it is transfered with every clone, push, and pull.
+
+== Usage
+
+Simply run `hier ui` in a git checkout! Hier can also serve from a
+bare repo by passing the name of the repo as a third argument.
+
+If you wish, for some reason, to prohibit Hier from serving a
+particular repo (possibly while you are developing Hier, in case of an
+errant libgit2 API call, or to protect a private repo from being
+served by a multiplexing script), you can set `hier.verboten` to true
+in the repo's git config.
+
+== Hacking
+
+You will need to install the following tools:
+
+[inline]
+compass:: `gem install --user compass`
+go-bindata:: `go get -u github.com/jteeuwen/go-bindata/...`
+protoc-gen-gogo:: `go get -u github.com/gogo/protobuf/protoc-gen-gogo`
+protoc:: `apt-get install protobuf-compiler`
+
+All files can be regenerated from their respective sources by running
+`go generate github.com/thequux/hier/...`.
+
+While developing Hier, you will probably want to build hier with `go
+build -tags debug github.com/thequux/hier`; this way, changes to the
+templates do not require rerunning `go generate` and `go build`
+(unless a new template is created); the app just needs to be
+restarted.
+

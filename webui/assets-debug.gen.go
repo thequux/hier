@@ -25,6 +25,96 @@ type asset struct {
 	info  os.FileInfo
 }
 
+// static_hier_css_ reads file data from disk. It returns an error on failure.
+func static_hier_css_() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/#hier.css#"
+	name := "static/#hier.css#"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_ie_css reads file data from disk. It returns an error on failure.
+func static_css_ie_css() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/css/ie.css"
+	name := "static/css/ie.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_print_css reads file data from disk. It returns an error on failure.
+func static_css_print_css() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/css/print.css"
+	name := "static/css/print.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_screen_css reads file data from disk. It returns an error on failure.
+func static_css_screen_css() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/css/screen.css"
+	name := "static/css/screen.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_hier_js reads file data from disk. It returns an error on failure.
+func static_js_hier_js() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/js/hier.js"
+	name := "static/js/hier.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // templates_new_ticket_html reads file data from disk. It returns an error on failure.
 func templates_new_ticket_html() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/new_ticket.html"
@@ -84,6 +174,11 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
+	"static/#hier.css#": static_hier_css_,
+	"static/css/ie.css": static_css_ie_css,
+	"static/css/print.css": static_css_print_css,
+	"static/css/screen.css": static_css_screen_css,
+	"static/js/hier.js": static_js_hier_js,
 	"templates/new_ticket.html": templates_new_ticket_html,
 }
 
@@ -127,6 +222,22 @@ type _bintree_t struct {
 	Children map[string]*_bintree_t
 }
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
+	"static": &_bintree_t{nil, map[string]*_bintree_t{
+		"#hier.css#": &_bintree_t{static_hier_css_, map[string]*_bintree_t{
+		}},
+		"css": &_bintree_t{nil, map[string]*_bintree_t{
+			"ie.css": &_bintree_t{static_css_ie_css, map[string]*_bintree_t{
+			}},
+			"print.css": &_bintree_t{static_css_print_css, map[string]*_bintree_t{
+			}},
+			"screen.css": &_bintree_t{static_css_screen_css, map[string]*_bintree_t{
+			}},
+		}},
+		"js": &_bintree_t{nil, map[string]*_bintree_t{
+			"hier.js": &_bintree_t{static_js_hier_js, map[string]*_bintree_t{
+			}},
+		}},
+	}},
 	"templates": &_bintree_t{nil, map[string]*_bintree_t{
 		"new_ticket.html": &_bintree_t{templates_new_ticket_html, map[string]*_bintree_t{
 		}},
