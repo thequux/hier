@@ -22,16 +22,24 @@ ticket. (e.g., if the initial artifact for a ticket has SHA1 digest
 repository as
 `f1d2d2f924e986ac86fdf7b36c94bcdf32beec15/f1d2d2f924e986ac86fdf7b36c94bcdf32beec15`)
 
+NOTE: The actual OID of an artifact blob is *highly* (i.e., 1/~2^80^~)
+unlikely to be the same as the hash used in the filename, because the
+hash used by git includes the `blob` header, whereas this hash
+doesn't. Further, in general, there is no way to compute one from the
+other without a first preimage attack on SHA-1.
+
 There may also exist a directory in `@hier/tickets` named "config";
 containing the Hier ticketing system's configuration. This consists of
-the following files:
+the following objects:
 
 types:: A newline-separated list of ticket types
-statuses:: A newline-separated list of ticket statuses. Each line may
-  optionally be split into two parts ("state" and "resolution") by a
-  single `:`; if so, the status MAY NOT appear on a line by
-  itself. (e.g. if the status "Closed:Fixed" appears in the list,
-  "Closed" may not appear on its own.)
+statuses:: A tree where each file's name is a ticket status.  The
+  contents have no semantic value, and when written, SHOULD point to
+  the empty object (`e69de29bb2d1d6434b8b29ae775ad8c2e48c5391`).  Each
+  file name may optionally be split into two parts ("state" and
+  "resolution") by a single `:`; if so, the state MAY NOT appear as a
+  status on its own. (e.g. if the status "Closed:Fixed" appears in the
+  list, "Closed" may not appear on its own.)
 resolve_status:: Contains a script to resolve conflicting statuses, in
   an as-yet-undetermined scripting language.
 

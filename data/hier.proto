@@ -1,17 +1,24 @@
 package data;
 
+message Author {
+  required string Name = 1;
+  required string Email = 2;
+}
+
 message TicketArtifact {
+  // Required on first root artifact. Ignored everywhere else.
   optional string title = 1;
+  
   // The hashes of all tips of the artifact DAG when this artifact was written
   repeated bytes after = 2;
 
-  // Only relevant for the first artifact in a ticket.
+  // Only relevant for the first artifact in a ticket, where it is required
   optional string type = 3;
 
   optional string status = 4;
   
   // Markdown-formatted
   optional string message = 5;
-  required string author = 6;
+  required Author author = 6;
   required string date = 7;
 }
