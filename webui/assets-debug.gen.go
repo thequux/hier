@@ -115,10 +115,64 @@ func static_js_hier_js() (*asset, error) {
 	return a, err
 }
 
+// templates_footer_html reads file data from disk. It returns an error on failure.
+func templates_footer_html() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/footer.html"
+	name := "templates/footer.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// templates_header_html reads file data from disk. It returns an error on failure.
+func templates_header_html() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/header.html"
+	name := "templates/header.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // templates_new_ticket_html reads file data from disk. It returns an error on failure.
 func templates_new_ticket_html() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/new_ticket.html"
 	name := "templates/new_ticket.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// templates_view_ticket_html reads file data from disk. It returns an error on failure.
+func templates_view_ticket_html() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/view_ticket.html"
+	name := "templates/view_ticket.html"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -179,7 +233,10 @@ var _bindata = map[string]func() (*asset, error){
 	"static/css/print.css": static_css_print_css,
 	"static/css/screen.css": static_css_screen_css,
 	"static/js/hier.js": static_js_hier_js,
+	"templates/footer.html": templates_footer_html,
+	"templates/header.html": templates_header_html,
 	"templates/new_ticket.html": templates_new_ticket_html,
+	"templates/view_ticket.html": templates_view_ticket_html,
 }
 
 // AssetDir returns the file names below a certain
@@ -239,7 +296,13 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 		}},
 	}},
 	"templates": &_bintree_t{nil, map[string]*_bintree_t{
+		"footer.html": &_bintree_t{templates_footer_html, map[string]*_bintree_t{
+		}},
+		"header.html": &_bintree_t{templates_header_html, map[string]*_bintree_t{
+		}},
 		"new_ticket.html": &_bintree_t{templates_new_ticket_html, map[string]*_bintree_t{
+		}},
+		"view_ticket.html": &_bintree_t{templates_view_ticket_html, map[string]*_bintree_t{
 		}},
 	}},
 }}

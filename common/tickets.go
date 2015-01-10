@@ -11,13 +11,36 @@ import (
 )
 
 type TicketId [20]byte
+func ParseTicketId(id string) (TicketId, error) {
+	var ticketId TicketId
+	if l, err := hex.Decode(ticketId[:], []byte(id)); err != nil {
+		return ticketId, err
+	} else if l != 20 {
+		return ticketId, fmt.Errorf("TicketID is the wrong length")
+	}
+	return ticketId, nil
+}
+func TicketIdFromRaw(src []byte) TicketId {
+	var ret TicketId
+	copy(ret[:], src[0:20])
+	return ret
+}
+
+func (id TicketId) String() string {
+	return hex.EncodeToString(id[:])
+}
+
+
 
 type Ticket struct {
 	Hash TicketId
 	Title string
 	Type string
 	Status string
-	artifacts []*data.TicketArtifact
+	// The Artifacts array is guaranteed to be sorted in some
+	// topological order.
+	Artifacts []*data.TicketArtifact
+	no_copy bool
 }
 
 type TicketConfig struct {
@@ -92,6 +115,15 @@ func (app *AppData) NewTicket(artifact *data.TicketArtifact) (*Ticket, error) {
 	if artifact.Title == nil {panic("Missing title!")}
 	if artifact.Type == nil {panic("Missing type!")}
 	if artifact.Status == nil {panic("Missing status!")}
+	if artifact.Author == nil {
+		config, _ := app.Repo.Config()
+		name, _ := config.LookupString("user.name")
+		email, _ := config.LookupString("user.email")
+		artifact.Author = &data.Author{
+			Name: &name,
+			Email: &email,
+		}
+	}
 
 	marshaled, err := proto.Marshal(artifact)
 	if err != nil {panic(err)}
@@ -99,25 +131,40 @@ func (app *AppData) NewTicket(artifact *data.TicketArtifact) (*Ticket, error) {
 	odb, err := app.Repo.Odb()
 	if err != nil {panic(err)}
 	oid, err := odb.Write(marshaled, git.ObjectBlob)
-	hash := sha1.Sum(marshaled)
+	hash := TicketId(sha1.Sum(marshaled))
 	if err != nil {
 		return nil, err
 	}
 	oldCommitObj, _ := app.TicketBranch().Peel(git.ObjectCommit)
 	oldCommit := (oldCommitObj).(*git.Commit)
 	oldTree, _ := oldCommit.Tree()
-	tb, err := app.Repo.TreeBuilderFromTree(oldTree)
+
+	// create the new ticket tree
+	tb, err := app.Repo.TreeBuilder()
+	if err != nil {panic(err)}
+	if err := tb.Insert(hash.String(), oid, 0100644); err != nil {
+		panic(err)
+	}
+	oid, err = tb.Write()
 	if err != nil {panic(err)}
 
+	// Add the new tree to the branch
+	tb, err = app.Repo.TreeBuilderFromTree(oldTree)
+	if err != nil {panic(err)}
+	err = tb.Insert(hash.String(), oid, 0040000)
+	if err != nil {
+		panic(err)
+	}
+	tree_oid, err := tb.Write()
+	if err != nil {panic(err)}
+	tree, err := app.Repo.LookupTree(tree_oid)
+
+	// Commit
 	author := &git.Signature{
 		Name: *artifact.Author.Name,
 		Email: *artifact.Author.Email,
 		When: time.Now(),
 	}
-	tb.Insert(fmt.Sprintf("%x/%x", hash, hash), oid, 0444)
-	tree_oid, err := tb.Write()
-	if err != nil {panic(err)}
-	tree, err := app.Repo.LookupTree(tree_oid)
 	if err != nil {panic(err)}
 	// TODO: Come up with a useful commit message
 	
@@ -130,38 +177,41 @@ func (app *AppData) NewTicket(artifact *data.TicketArtifact) (*Ticket, error) {
 		Title: *artifact.Title,
 		Type: *artifact.Type,
 		Status: *artifact.Status,
-		artifacts: []*data.TicketArtifact{artifact},
+		Artifacts: []*data.TicketArtifact{artifact},
 	}, nil
 }
 
-func (app *AppData) parseTicket(id TicketId, tree *git.Tree) Ticket {
+func (app *AppData) parseTicket(id TicketId, tree *git.Tree) (*Ticket, error) {
 	// For now, we just look at the root artifact.  Later, we'll
 	// parse all the artifacts on each ticket to get a overall
 	// status.
-	rootArtifact := tree.EntryByName(fmt.Sprintf("%x", id))
-	if rootArtifact == nil {panic("Malformed ticket; missing root artifact")}
+	rootArtifact := tree.EntryByName(id.String())
+	if rootArtifact == nil {return nil, fmt.Errorf("Ticket is missing root artifact")}
 	if rootArtifact.Type != git.ObjectBlob {
-		panic("Malformed ticket: contains non-blob root artifact")
+		return nil, fmt.Errorf("Malformed ticket: root artifact is not a blob")
 	}
-	blob, _ := app.Repo.LookupBlob(rootArtifact.Id)
+	blob, err := app.Repo.LookupBlob(rootArtifact.Id)
+	if err != nil {
+		return nil, err
+	}
 	var artifact data.TicketArtifact
 	if err := proto.Unmarshal(blob.Contents(), &artifact); err != nil {
-		panic("Malformed artifact: " + err.Error())
+		return nil, err
 	}
-	return Ticket{
+	return &Ticket{
 		Hash: id,
 		Title: *artifact.Title,
 		Type: *artifact.Type,
 		Status: *artifact.Status,
-		artifacts: []*data.TicketArtifact{&artifact},
-	}
+		Artifacts: []*data.TicketArtifact{&artifact},
+	}, nil
 }
 
-func (app *AppData) Tickets() []Ticket {
+func (app *AppData) Tickets() []*Ticket {
 	ticketRef := app.TicketBranch()
 	ticketTreeObj, _ := ticketRef.Peel(git.ObjectTree)
 	ticketTree := ticketTreeObj.(*git.Tree)
-	result := []Ticket{}
+	result := []*Ticket{}
 	for i := uint64(0); i < ticketTree.EntryCount(); i++ {
 		entry := ticketTree.EntryByIndex(i)
 		if entry == nil {panic("Should not happen")}
@@ -175,14 +225,29 @@ func (app *AppData) Tickets() []Ticket {
 			continue
 		}
 		ticketTree, _ := app.Repo.LookupTree(entry.Id)
-		var ticketId TicketId
-		if l, err := hex.Decode(ticketId[:], []byte(entry.Name)); err != nil {
-			continue
-		} else if l != 20 {
-			continue
-		}
+		ticketId, err := ParseTicketId(entry.Name)
+		if err != nil {continue}
 
-		result = append(result, app.parseTicket(ticketId, ticketTree))
+		ticket, err := app.parseTicket(ticketId, ticketTree)
+		if err != nil {continue}
+
+		result = append(result, ticket)
 	}
-	return []Ticket{}
+	return result
+}
+
+func (app *AppData) GetTicket(id TicketId) (*Ticket, error) {
+	ticketRootObj, _ := app.TicketBranch().Peel(git.ObjectTree)
+	ticketRoot := ticketRootObj.(*git.Tree)
+	entry := ticketRoot.EntryByName(id.String())
+	if entry == nil {
+		return nil, fmt.Errorf("No such ticket")
+	} else if entry.Type != git.ObjectTree {
+		return nil, fmt.Errorf("Ticket has wrong type")
+	}
+	tree, err := app.Repo.LookupTree(entry.Id)
+	if err != nil {
+		return nil, err
+	}
+	return app.parseTicket(id, tree)
 }

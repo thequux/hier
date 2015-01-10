@@ -1,46 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>HIER :: New ticket</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/screen.css">
-    <script type="text/javascript" src="/static/js/hier.js"></script>
-    <script type="text/javascript" src="/js/data.js"></script>
-  </head>
-  <body>
-    <h1>Create a new ticket</h1>
-    <form action="/ticket/new" method="POST">
-      <table>
-	<tr>
-	  <th><label for="title">Title</label></th>
-	  <td><input type="text" name="title"></td>
-	</tr>
-	<tr>
-	  <th><label for="type">Type</label></th>
-	  <td><select name="type">
+<h1>Create a new ticket</h1>
+<form action="/ticket/new" method="POST">
+  <table>
+    <tr>
+      <th><label for="title">Title</label></th>
+      <td><input type="text" name="title"></td>
+    </tr>
+    <tr>
+      <th><label for="type">Type</label></th>
+      <td><select name="type">
 {{range .Types}}\
-            <option value="{{.}}">{{.}}</option>
+        <option value="{{.}}">{{.}}</option>
 {{end}}\
-	  </select></td>
-	</tr>
-	<tr>
-	  <th><label for="status">Status</label></th>
-	  <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.resolution)">
-	      <option value="">---</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="status">Status</label></th>
+      <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.substatus)">
+        <option value="">---</option>
 {{range $name, $substatus := .Statuses}}\
-            <option value="{{$name}}">{{$name}}</option>
+        <option value="{{$name}}">{{$name}}</option>
 {{end}}\
-	  </select></td>
-	</tr>
-	<tr class="hider" hidden>
-	  <th><label for="resolution">Resolution</label></th>
-	  <td><select name="resolution"></select></td>
-	</tr>
-	<tr>
-	  <th><label for="message">Message</label></th>
-	  <td><textarea name="message"></textarea></td>
-	</tr>
-      </table>
-      <input type="submit" value="Submit">
-    </form>
-  </body>
-</html>
+      </select></td>
+    </tr>
+    <tr class="hider" hidden>
+      <th><label for="substatus">Resolution</label></th>
+      <td><select name="substatus"></select></td>
+    </tr>
+    <tr>
+      <th><label for="message">Message</label></th>
+      <td><textarea name="message"></textarea></td>
+    </tr>
+  </table>
+  <input type="submit" value="Submit">
+</form>

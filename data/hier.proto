@@ -1,8 +1,8 @@
 package data;
 
 message Author {
-  required string Name = 1;
-  required string Email = 2;
+  required string name = 1;
+  required string email = 2;
 }
 
 message TicketArtifact {
@@ -20,5 +20,7 @@ message TicketArtifact {
   // Markdown-formatted
   optional string message = 5;
   required Author author = 6;
+
+  // RFC3339 date, without nanoseconds
   required string date = 7;
 }

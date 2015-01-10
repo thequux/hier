@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <td colspan=3>{{.Title}}</td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td>{{.Type}}</td>
+    <th>Status</th>
+    <td>{{.Status}}</td>
+  </tr>
+</table>
+{{range .Artifacts}}\
+<div class="comment">
+  <div class="author">
+    <span class="name">{{.Author.Name}}</span>
+    <span class="email">{{.Author.Email}}</span>
+  </div>
+  <div class="date">{{.Date}}</div>
+  <div class="formatted message">{{.Message}}</div>
+</div>
+{{end}}
+    
