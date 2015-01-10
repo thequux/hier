@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/thequux/hier/common"
 	"github.com/thequux/hier/data"
+	"sort"
 	"time"
 )
 
@@ -15,10 +16,46 @@ type WebApp struct {
 	App *common.AppData
 }
 
-func (app *WebApp) ListTickets(c *gin.Context) {
-	for ticket := range app.App.Tickets() {
-		fmt.Println(ticket)
+type TicketSortOrder int
+const (
+	TicketSortByID TicketSortOrder = iota
+	TicketSortByName
+	TicketSortByCTime
+	TicketSortByMTime
+)
+
+type TicketSort struct{
+	list []*common.Ticket
+	order TicketSortOrder
+}
+
+func (s TicketSort) Sort() { sort.Sort(s) }
+func (s TicketSort) Len() int { return len(s.list) }
+func (s TicketSort) Swap(i,j int) { s.list[i],s.list[j] = s.list[j],s.list[i] }
+func (s TicketSort) Less(i,j int) bool {
+	a,b := s.list[i], s.list[j]
+	switch s.order {
+	default: fallthrough
+	case TicketSortByID:
+		for i := 0; i < 20; i++ {
+			if a.Hash[i] == b.Hash[i] {
+				continue
+			}
+			return a.Hash[i] < b.Hash[i]
+		}
+		return false
+	case TicketSortByName:
+		return a.Title < b.Title
 	}
+}
+
+func (app *WebApp) ListTickets(c *gin.Context) {
+	tickets := app.App.Tickets()
+	TicketSort{tickets, TicketSortByName}.Sort()
+	c.HTML(200, "templates/ticket_list.html", SkeletonParams{
+		Title: "Tickets",
+		Content: tickets,
+	})
 }
 
 type TicketParams struct {

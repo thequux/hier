@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Resolution</th>
+  </tr>
+{{range .}}\
+  <tr>
+    <td><a href="/ticket/{{.Hash}}" class="monospace">{{.Hash}}</a></td>
+    <td>{{.Title}}</td>
+    <td>{{.Status}}</td>
+    <td>{{if .Resolution}}{{.Resolution}}{{else}}&mdash;{{end}}</td>
+  </tr>
+{{end}}\
+</table>

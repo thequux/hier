@@ -97,6 +97,78 @@ func static_css_screen_css() (*asset, error) {
 	return a, err
 }
 
+// static_images_favicon_16_png reads file data from disk. It returns an error on failure.
+func static_images_favicon_16_png() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/images/favicon-16.png"
+	name := "static/images/favicon-16.png"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_images_favicon_32_png reads file data from disk. It returns an error on failure.
+func static_images_favicon_32_png() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/images/favicon-32.png"
+	name := "static/images/favicon-32.png"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_images_logo_large_png reads file data from disk. It returns an error on failure.
+func static_images_logo_large_png() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/images/logo-large.png"
+	name := "static/images/logo-large.png"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_images_logo_small_png reads file data from disk. It returns an error on failure.
+func static_images_logo_small_png() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/images/logo-small.png"
+	name := "static/images/logo-small.png"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_js_hier_js reads file data from disk. It returns an error on failure.
 func static_js_hier_js() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/js/hier.js"
@@ -155,6 +227,24 @@ func templates_header_html() (*asset, error) {
 func templates_new_ticket_html() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/new_ticket.html"
 	name := "templates/new_ticket.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// templates_ticket_list_html reads file data from disk. It returns an error on failure.
+func templates_ticket_list_html() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/templates/ticket_list.html"
+	name := "templates/ticket_list.html"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -232,10 +322,15 @@ var _bindata = map[string]func() (*asset, error){
 	"static/css/ie.css": static_css_ie_css,
 	"static/css/print.css": static_css_print_css,
 	"static/css/screen.css": static_css_screen_css,
+	"static/images/favicon-16.png": static_images_favicon_16_png,
+	"static/images/favicon-32.png": static_images_favicon_32_png,
+	"static/images/logo-large.png": static_images_logo_large_png,
+	"static/images/logo-small.png": static_images_logo_small_png,
 	"static/js/hier.js": static_js_hier_js,
 	"templates/footer.html": templates_footer_html,
 	"templates/header.html": templates_header_html,
 	"templates/new_ticket.html": templates_new_ticket_html,
+	"templates/ticket_list.html": templates_ticket_list_html,
 	"templates/view_ticket.html": templates_view_ticket_html,
 }
 
@@ -290,6 +385,16 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			"screen.css": &_bintree_t{static_css_screen_css, map[string]*_bintree_t{
 			}},
 		}},
+		"images": &_bintree_t{nil, map[string]*_bintree_t{
+			"favicon-16.png": &_bintree_t{static_images_favicon_16_png, map[string]*_bintree_t{
+			}},
+			"favicon-32.png": &_bintree_t{static_images_favicon_32_png, map[string]*_bintree_t{
+			}},
+			"logo-large.png": &_bintree_t{static_images_logo_large_png, map[string]*_bintree_t{
+			}},
+			"logo-small.png": &_bintree_t{static_images_logo_small_png, map[string]*_bintree_t{
+			}},
+		}},
 		"js": &_bintree_t{nil, map[string]*_bintree_t{
 			"hier.js": &_bintree_t{static_js_hier_js, map[string]*_bintree_t{
 			}},
@@ -301,6 +406,8 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 		"header.html": &_bintree_t{templates_header_html, map[string]*_bintree_t{
 		}},
 		"new_ticket.html": &_bintree_t{templates_new_ticket_html, map[string]*_bintree_t{
+		}},
+		"ticket_list.html": &_bintree_t{templates_ticket_list_html, map[string]*_bintree_t{
 		}},
 		"view_ticket.html": &_bintree_t{templates_view_ticket_html, map[string]*_bintree_t{
 		}},

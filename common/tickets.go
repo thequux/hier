@@ -37,6 +37,7 @@ type Ticket struct {
 	Title string
 	Type string
 	Status string
+	Resolution string
 	// The Artifacts array is guaranteed to be sorted in some
 	// topological order.
 	Artifacts []*data.TicketArtifact
@@ -111,10 +112,28 @@ func (app *AppData) NewTicket(artifact *data.TicketArtifact) (*Ticket, error) {
 		panic("Can't file a new ticket with history")
 	}
 
+	config := app.TicketConfig()
 	// As this is the first artifact, we require title to be set.
 	if artifact.Title == nil {panic("Missing title!")}
 	if artifact.Type == nil {panic("Missing type!")}
 	if artifact.Status == nil {panic("Missing status!")}
+	if resolutions, ok := config.Statuses[*artifact.Status]; ok {
+		if artifact.Resolution == nil {panic("Missing resolution")}
+		res_found := false
+		for _, res := range resolutions {
+			if res == *artifact.Resolution {
+				res_found = true
+				break
+			}
+		}
+		if !res_found {
+			panic("Invalid resolution")
+		}
+	} else {
+		if artifact.Resolution != nil {
+			panic("Unexpected resolution")
+		}
+	}
 	if artifact.Author == nil {
 		config, _ := app.Repo.Config()
 		name, _ := config.LookupString("user.name")

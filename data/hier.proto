@@ -6,6 +6,8 @@ message Author {
 }
 
 message TicketArtifact {
+  extensions 1000 to max;
+
   // Required on first root artifact. Ignored everywhere else.
   optional string title = 1;
   
@@ -16,6 +18,7 @@ message TicketArtifact {
   optional string type = 3;
 
   optional string status = 4;
+  optional string resolution = 8;
   
   // Markdown-formatted
   optional string message = 5;
@@ -23,4 +26,6 @@ message TicketArtifact {
 
   // RFC3339 date, without nanoseconds
   required string date = 7;
+
+  // further fields start at 9.
 }
