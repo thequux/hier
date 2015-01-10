@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="logos.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="TriangleOutL"
+       style="overflow:visible">
+      <path
+         id="path3905"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3766"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="281.54061"
+     inkscape:cy="638.85518"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     guidecolor="#c40000"
+     guideopacity="0.49803922"
+     inkscape:window-width="1364"
+     inkscape:window-height="747"
+     inkscape:window-x="0"
+     inkscape:window-y="19"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4393"
+       empspacing="10"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="0px"
+       originy="0.5px"
+       spacingx="0.5px"
+       spacingy="0.5px" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="190,684"
+       id="guide4413" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="222,682"
+       id="guide4415" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="205,670"
+       id="guide4417" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="205,702"
+       id="guide4419" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="230,680"
+       id="guide4441" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="246,682"
+       id="guide4443" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="243,686"
+       id="guide4445" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="180.5,628.5"
+       id="guide4492" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4408"
+       transform="translate(0.5,14.500003)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text2985"
+         y="367.36218"
+         x="132"
+         style="font-size:36px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+         xml:space="preserve"><tspan
+           y="367.36218"
+           x="132"
+           id="tspan2987"
+           sodipodi:role="line">Hier</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4395"
+         d="m 110,367.36218 15,0 -5,-5 10,-10 -10,-10 -10,10 -5,-5 0,20 z"
+         style="fill:#ffdd00;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g4507">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path4397"
+         d="m 101,496.36218 0,-59.5 16,16 29,-29 27.5,27.5 -29,29 16,16 z"
+         style="fill:#ffdd00;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text4399"
+         y="497.36218"
+         x="179.69067"
+         style="font-size:107px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:107px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+           y="497.36218"
+           x="179.69067"
+           id="tspan4401"
+           sodipodi:role="line">Hier</tspan></text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4395-5"
+       d="m 110.5,321.86218 20,0 -6,-6 12,-12 -13,-13 -12,12 -6,-6 0,25 z"
+       style="fill:#ffdd00;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:nodetypes="ccccccccc" />
+    <path
+       style="fill:#ffdd00;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 150.5,321.86218 12,0 -3,-3 6,-6 -6,-6 -6,6 -3,-3 z"
+       id="path4447"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="15.5"
+       y="321.86218"
+       id="text4468"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4470"
+         x="15.5"
+         y="321.86218">Favicons</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="29.5"
+       y="104.86218"
+       id="text4472"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4474"
+         x="29.5"
+         y="104.86218">Todo:</tspan><tspan
+         sodipodi:role="line"
+         x="29.5"
+         y="136.09509"
+         id="tspan4476">* The kerning on OpenDIN is awful. </tspan><tspan
+         sodipodi:role="line"
+         x="29.5"
+         y="167.13109"
+         id="tspan4478">   Perhaps replace with the Linotype version?</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="110.5"
+       y="281.86218"
+       id="text4480"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4482"
+         x="110.5"
+         y="281.86218">32</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="147.5"
+       y="281.86218"
+       id="text4484"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4486"
+         x="147.5"
+         y="281.86218">16</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="-0.4332428"
+       y="380.96429"
+       id="text4488"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4490"
+         x="-0.4332428"
+         y="380.96429">Small logo</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:OpenDinSchriftenEngshrift;-inkscape-font-specification:OpenDinSchriftenEngshrift Medium"
+       x="-12.020815"
+       y="482.43411"
+       id="text4499"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-12.020815"
+         y="482.43411"
+         id="tspan4503">Large logo</tspan></text>
+  </g>
+</svg>
