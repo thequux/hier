@@ -25,24 +25,6 @@ type asset struct {
 	info  os.FileInfo
 }
 
-// static_hier_css_ reads file data from disk. It returns an error on failure.
-func static_hier_css_() (*asset, error) {
-	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/#hier.css#"
-	name := "static/#hier.css#"
-	bytes, err := bindata_read(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
 // static_css_ie_css reads file data from disk. It returns an error on failure.
 func static_css_ie_css() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/css/ie.css"
@@ -83,6 +65,24 @@ func static_css_print_css() (*asset, error) {
 func static_css_screen_css() (*asset, error) {
 	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/css/screen.css"
 	name := "static/css/screen.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_hier_css reads file data from disk. It returns an error on failure.
+func static_hier_css() (*asset, error) {
+	path := "/home/thequux/Projects/go/src/github.com/thequux/hier/webui/static/hier.css"
+	name := "static/hier.css"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -318,10 +318,10 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"static/#hier.css#": static_hier_css_,
 	"static/css/ie.css": static_css_ie_css,
 	"static/css/print.css": static_css_print_css,
 	"static/css/screen.css": static_css_screen_css,
+	"static/hier.css": static_hier_css,
 	"static/images/favicon-16.png": static_images_favicon_16_png,
 	"static/images/favicon-32.png": static_images_favicon_32_png,
 	"static/images/logo-large.png": static_images_logo_large_png,
@@ -375,8 +375,6 @@ type _bintree_t struct {
 }
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	"static": &_bintree_t{nil, map[string]*_bintree_t{
-		"#hier.css#": &_bintree_t{static_hier_css_, map[string]*_bintree_t{
-		}},
 		"css": &_bintree_t{nil, map[string]*_bintree_t{
 			"ie.css": &_bintree_t{static_css_ie_css, map[string]*_bintree_t{
 			}},
@@ -384,6 +382,8 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			}},
 			"screen.css": &_bintree_t{static_css_screen_css, map[string]*_bintree_t{
 			}},
+		}},
+		"hier.css": &_bintree_t{static_hier_css, map[string]*_bintree_t{
 		}},
 		"images": &_bintree_t{nil, map[string]*_bintree_t{
 			"favicon-16.png": &_bintree_t{static_images_favicon_16_png, map[string]*_bintree_t{

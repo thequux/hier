@@ -1,3 +1,4 @@
+{{with .Ticket}}
 <table>
   <tr>
     <th>Title</th>
@@ -12,12 +13,38 @@
 </table>
 {{range .Artifacts}}\
 <div class="comment">
-  <div class="author">
+  <div class="header">
     <span class="name">{{.Author.Name}}</span>
-    <span class="email">{{.Author.Email}}</span>
+    <span class="email"><a href="mailto:{{.Author.Email}}">{{.Author.Email}}</a></span>
+    <span class="date">{{.Date}}</span>
   </div>
-  <div class="date">{{.Date}}</div>
-  <div class="formatted message">{{.Message}}</div>
+  <div class="formatted content">{{markdown .Message}}</div>
 </div>
 {{end}}
-    
+{{end}}
+
+<h1>Add comment</h1>
+<form method="POST">
+<table>
+  <tr>
+    <td colspan=4>
+      <textarea name="message"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <th>Status</th>
+    <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.substatus)">
+      <option value="">---</option>
+{{range $name, $substatus := .Config.Statuses}}\
+      <option value="{{$name}}">{{$name}}</option>
+{{end}}\
+    </select></td>
+  </tr>
+  <!-- TODO: figure out how to put this on one line -->
+  <tr class="hider" hidden>
+    <th><label for="substatus">Resolution</label></th>
+    <td><select name="substatus"></select></td>
+  </tr>
+</table>
+<input type="submit" value="Submit">
+</form>

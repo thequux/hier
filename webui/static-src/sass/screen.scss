@@ -4,3 +4,100 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+
+$yellow: #ffdd00;
+$radius: 8px;
+
+@mixin bordered-box() {
+    //border: 2px solid $yellow;
+    //border-radius: $radius;
+    & > .header {
+	box-sizing: border-box;
+	background: $yellow;
+	position: relative;
+	width: 100%;
+	padding: 0.2ex 1ex;
+	border-top-left-radius: $radius;
+	border-top-right-radius: $radius;
+    }
+    & > .content {
+	padding: 1ex;
+	border-left: 2px solid $yellow;
+	border-right: 2px solid $yellow;
+	border-bottom: 2px solid $yellow;
+	border-bottom-left-radius: $radius;
+	border-bottom-right-radius: $radius;
+    }
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.monospace {
+    font-family: "Droid Sans Mono", "Inconsolata", "Consolas", "Monaco", monospace;
+}
+.body-wrapper {
+    @include bordered-box();
+    margin: 1em 1em 1em 1em;
+}
+
+.logo {
+    margin: 1em 1em 0em 2em;
+}
+
+.header {
+    
+    &.navbar td {
+	text-align: center;
+	a {
+	    color: black;
+	    text-decoration: none;
+	}
+    }
+}
+
+.content {
+    th {
+	font-weight: bold;
+    }
+    td, th {
+	padding: 0.2ex 0.5ex;
+    }
+    tr:nth-child(even) {
+	background: #eee;
+    }
+}
+
+.comment {
+    @include bordered-box();
+    margin-top: 1ex;
+    & > .header {
+	.email::before {
+	    content: " <";
+	}
+	.email::after {
+	    content: ">";
+	}
+	.date {
+	    float: right;
+	}
+    }
+    .message {
+	padding: 1ex;
+    }
+}
+
+.formatted {
+    h1 {
+	font-size: 180%;
+	font-weight: bold;
+    }
+    em {
+	font-style: italic;
+    }
+    ul > li {
+	list-style: square outside none;
+	margin-left: 2em;
+    }
+}

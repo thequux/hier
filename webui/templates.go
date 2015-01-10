@@ -3,6 +3,7 @@ package webui
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/russross/blackfriday"
 	"strings"
 	"html/template"
 )
@@ -11,6 +12,9 @@ var funcMap = map[string]interface{} {
 	"json": func(v interface{}) (string, error) {
 		out, err := json.Marshal(v)
 		return string(out), err
+	},
+	"markdown": func (v string) template.HTML {
+		return template.HTML(blackfriday.MarkdownCommon([]byte(v)))
 	},
 }
 

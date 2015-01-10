@@ -87,12 +87,19 @@ func (app *WebApp) NewTicket(c *gin.Context) {
 	c.Redirect(303, fmt.Sprintf("/ticket/%s", ticket.Hash))
 }
 
+type TicketDisplayParams struct {
+	Ticket *common.Ticket
+	Config common.TicketConfig
+}
+
 func (app *WebApp) GetTicket(c *gin.Context) {
 	id := c.Params.ByName("id")
 	if id == "new" {
 		c.HTML(200, "templates/new_ticket.html", SkeletonParams{
 			Title: "New Ticket",
-			Content: app.App.TicketConfig(),
+			Content: TicketDisplayParams{
+				Config: app.App.TicketConfig(),
+			},
 		})
 	} else {
 		ticketId, err := common.ParseTicketId(id)
@@ -107,7 +114,10 @@ func (app *WebApp) GetTicket(c *gin.Context) {
 		
 		c.HTML(200, "templates/view_ticket.html", SkeletonParams{
 			Title: "View Ticket",
-			Content: ticket,
+			Content: TicketDisplayParams{
+				Config: app.App.TicketConfig(),
+				Ticket: ticket,
+			},
 		})
 	}
 }
@@ -146,6 +156,8 @@ func Run(ctx *cli.Context) {
 	
 	println("Running!")
 	r := gin.Default()
+	// Reloads templates if built with debug
+	r.Use(TemplateReloader)
 	r.HTMLRender = &TemplateRenderer{Template:LoadTemplates()}
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(200, "Pong")

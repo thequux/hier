@@ -66,3 +66,120 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
+
+/* line 33, ../../static-src/sass/screen.scss */
+body {
+  font-family: sans-serif;
+}
+
+/* line 37, ../../static-src/sass/screen.scss */
+.monospace {
+  font-family: "Droid Sans Mono", "Inconsolata", "Consolas", "Monaco", monospace;
+}
+
+/* line 40, ../../static-src/sass/screen.scss */
+.body-wrapper {
+  margin: 1em 1em 1em 1em;
+}
+/* line 14, ../../static-src/sass/screen.scss */
+.body-wrapper > .header {
+  box-sizing: border-box;
+  background: #ffdd00;
+  position: relative;
+  width: 100%;
+  padding: 0.2ex 1ex;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+/* line 23, ../../static-src/sass/screen.scss */
+.body-wrapper > .content {
+  padding: 1ex;
+  border-left: 2px solid #ffdd00;
+  border-right: 2px solid #ffdd00;
+  border-bottom: 2px solid #ffdd00;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* line 45, ../../static-src/sass/screen.scss */
+.logo {
+  margin: 1em 1em 0em 2em;
+}
+
+/* line 51, ../../static-src/sass/screen.scss */
+.header.navbar td {
+  text-align: center;
+}
+/* line 53, ../../static-src/sass/screen.scss */
+.header.navbar td a {
+  color: black;
+  text-decoration: none;
+}
+
+/* line 61, ../../static-src/sass/screen.scss */
+.content th {
+  font-weight: bold;
+}
+/* line 64, ../../static-src/sass/screen.scss */
+.content td, .content th {
+  padding: 0.2ex 0.5ex;
+}
+/* line 67, ../../static-src/sass/screen.scss */
+.content tr:nth-child(even) {
+  background: #eee;
+}
+
+/* line 72, ../../static-src/sass/screen.scss */
+.comment {
+  margin-top: 1ex;
+}
+/* line 14, ../../static-src/sass/screen.scss */
+.comment > .header {
+  box-sizing: border-box;
+  background: #ffdd00;
+  position: relative;
+  width: 100%;
+  padding: 0.2ex 1ex;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+/* line 23, ../../static-src/sass/screen.scss */
+.comment > .content {
+  padding: 1ex;
+  border-left: 2px solid #ffdd00;
+  border-right: 2px solid #ffdd00;
+  border-bottom: 2px solid #ffdd00;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+/* line 76, ../../static-src/sass/screen.scss */
+.comment > .header .email::before {
+  content: " <";
+}
+/* line 79, ../../static-src/sass/screen.scss */
+.comment > .header .email::after {
+  content: ">";
+}
+/* line 82, ../../static-src/sass/screen.scss */
+.comment > .header .date {
+  float: right;
+}
+/* line 86, ../../static-src/sass/screen.scss */
+.comment .message {
+  padding: 1ex;
+}
+
+/* line 92, ../../static-src/sass/screen.scss */
+.formatted h1 {
+  font-size: 180%;
+  font-weight: bold;
+}
+/* line 96, ../../static-src/sass/screen.scss */
+.formatted em {
+  font-style: italic;
+}
+/* line 99, ../../static-src/sass/screen.scss */
+.formatted ul > li {
+  list-style: square outside none;
+  margin-left: 2em;
+}

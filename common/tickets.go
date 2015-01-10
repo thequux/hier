@@ -118,21 +118,25 @@ func (app *AppData) NewTicket(artifact *data.TicketArtifact) (*Ticket, error) {
 	if artifact.Type == nil {panic("Missing type!")}
 	if artifact.Status == nil {panic("Missing status!")}
 	if resolutions, ok := config.Statuses[*artifact.Status]; ok {
-		if artifact.Resolution == nil {panic("Missing resolution")}
-		res_found := false
-		for _, res := range resolutions {
-			if res == *artifact.Resolution {
-				res_found = true
-				break
+		if len(resolutions) != 0 {
+			if artifact.Resolution == nil {panic("Missing resolution")}
+			res_found := false
+			for _, res := range resolutions {
+				if res == *artifact.Resolution {
+					res_found = true
+					break
+				}
+			}
+			if !res_found {
+				panic("Invalid resolution")
+			}
+		} else {
+			if artifact.Resolution != nil {
+				panic("Unexpected resolution")
 			}
 		}
-		if !res_found {
-			panic("Invalid resolution")
-		}
 	} else {
-		if artifact.Resolution != nil {
-			panic("Unexpected resolution")
-		}
+		panic("Unknown status")
 	}
 	if artifact.Author == nil {
 		config, _ := app.Repo.Config()
