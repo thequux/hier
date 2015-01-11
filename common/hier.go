@@ -5,7 +5,7 @@ import (
 	git "github.com/libgit2/git2go"
 )
 
-const HierBranchPrefix string = "refs/hier"
+const HierBranchPrefix string = "⬋hier"
 
 type AppData struct {
 	Repo *git.Repository

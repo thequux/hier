@@ -49,7 +49,8 @@ type TicketConfig struct {
 	Statuses map[string][]string
 }
 
-const ticketRefName string = HierBranchPrefix + "/tickets"
+const ticketBranchName string = HierBranchPrefix + "/tickets"
+const ticketRefName string = "refs/heads/" + ticketBranchName
 
 func (app *AppData) TicketConfig() TicketConfig {
 	return TicketConfig{
@@ -74,9 +75,9 @@ func (app *AppData) TicketConfig() TicketConfig {
 	}
 }
 
-func (app *AppData) TicketBranch() *git.Reference {
+func (app *AppData) TicketBranch() *git.Branch {
 	app.Repo.EnsureLog(ticketRefName)
-	ticketBranch, err := app.Repo.LookupReference(ticketRefName)
+	ticketBranch, err := app.Repo.LookupBranch(ticketBranchName, git.BranchLocal)
 	if err != nil {
 		// Every ticket repo must *always* start with the same commit.
 		tree_oid, err := app.emptyTree()
@@ -96,7 +97,7 @@ func (app *AppData) TicketBranch() *git.Reference {
 		if err != nil {
 			panic(err)
 		}
-		ticketBranch, err = app.Repo.LookupReference(ticketRefName)
+		ticketBranch, err = app.Repo.LookupBranch(ticketBranchName, git.BranchLocal)
 		if err != nil {
 			panic(err)
 		}
