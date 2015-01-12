@@ -17,8 +17,9 @@ message TicketArtifact {
   // Only relevant for the first artifact in a ticket, where it is required
   optional string type = 3;
 
+  // required if resolution is present
   optional string status = 4;
-  optional string resolution = 8;
+  optional string resolution = 5;
   
   // Markdown-formatted
   optional string message = 5;

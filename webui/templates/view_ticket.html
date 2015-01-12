@@ -14,8 +14,8 @@
 {{range .Artifacts}}\
 <div class="comment">
   <div class="header">
-    <span class="name">{{.Author.Name}}</span>
-    <span class="email"><a href="mailto:{{.Author.Email}}">{{.Author.Email}}</a></span>
+    <span class="name">{{.AuthorName}}</span>
+    <span class="email"><a href="mailto:{{.AuthorEmail}}">{{.AuthorEmail}}</a></span>
     <span class="date">{{.Date}}</span>
   </div>
   <div class="formatted content">{{markdown .Message}}</div>
@@ -33,17 +33,17 @@
   </tr>
   <tr>
     <th>Status</th>
-    <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.substatus)">
+    <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.resolution)">
       <option value="">---</option>
-{{range $name, $substatus := .Config.Statuses}}\
+{{range $name, $resolution := .Config.Statuses}}\
       <option value="{{$name}}">{{$name}}</option>
 {{end}}\
     </select></td>
   </tr>
   <!-- TODO: figure out how to put this on one line -->
   <tr class="hider" hidden>
-    <th><label for="substatus">Resolution</label></th>
-    <td><select name="substatus"></select></td>
+    <th><label for="resolution">Resolution</label></th>
+    <td><select name="resolution"></select></td>
   </tr>
 </table>
 <input type="submit" value="Submit">

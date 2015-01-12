@@ -62,29 +62,65 @@ type TicketParams struct {
 	Title string `json:"title" form:"title" binding:"required"`
 	Type string `json:"type" form:"type" binding:"required"`
 	Status string `json:"status" form:"status" binding:"required"`
-	Substatus string `json:"substatus" form:"substatus"`
+	Resolution string `json:"resolution" form:"resolution"`
 	Message string `json:"message" form:"message"`
 }
 
-func (app *WebApp) NewTicket(c *gin.Context) {
-	var params TicketParams
-	if !c.Bind(&params) {
-		// TODO: redisplay the New Ticket page
-		c.String(500, "Error!")
+type TicketCommentParams struct {
+	Status string `json:"status" form:"status" binding:"required"`
+	Resolution string `json:"resolution" form:"resolution"`
+	Message string `json:"message" form:"message"`
+}
+
+func (app *WebApp) NewTicketComment(c *gin.Context) {
+	if c.Params.ByName("id") == "new" {
+		var params TicketParams
+		if !c.Bind(&params) {
+			// TODO: redisplay the New Ticket page
+			c.String(500, "Error!")
+			return
+		}
+		now := time.Now().Format(time.RFC3339)
+		artifact := &data.TicketArtifact{
+			Title: &params.Title,
+			Type: &params.Type,
+			Status: &params.Status,
+			Message: &params.Message,
+			Date: &now,
+		}
+		ticket, err := app.App.NewTicket(artifact)
+		if err != nil {
+			panic(err) // TODO: Handle better
+		}
+		c.Redirect(303, fmt.Sprintf("/ticket/%s", ticket.Hash))
+	} else {
+		var params TicketCommentParams
+		if !c.Bind(&params) {
+			// TODO: redisplay the New Ticket page
+			c.String(500, "Error!")
+			return
+		}
+		ticketId, err := common.ParseTicketId(c.Params.ByName("id"))
+		if err != nil {
+			panic(err) // TODO: Handle better
+		}
+		ticket, err := app.App.GetTicket(ticketId)
+		if err != nil {
+			panic(err) // TODO: Handle better
+		}
+		artifact := &common.TicketArtifact{
+			Message: params.Message,
+		}
+		if ticket.Status != params.Status || ticket.Resolution != params.Resolution {
+			artifact.Status = params.Status
+			artifact.Resolution = params.Resolution
+		}			
+		ticket.NewComment(artifact)
+			
+		// Redirect to the same page; we are always requested
+		// via POST, so this won't introduce a redirect loop.
+		c.Redirect(303, c.Request.URL.String())
 	}
-	now := time.Now().Format(time.RFC3339)
-	artifact := &data.TicketArtifact{
-		Title: &params.Title,
-		Type: &params.Type,
-		Status: &params.Status,
-		Message: &params.Message,
-		Date: &now,
-	}
-	ticket, err := app.App.NewTicket(artifact)
-	if err != nil {
-		panic(err)
-	}
-	c.Redirect(303, fmt.Sprintf("/ticket/%s", ticket.Hash))
 }
 
 type TicketDisplayParams struct {
@@ -110,6 +146,7 @@ func (app *WebApp) GetTicket(c *gin.Context) {
 		ticket, err := app.App.GetTicket(ticketId)
 		if err != nil {
 			c.String(500, err.Error())
+			return
 		}
 		
 		c.HTML(200, "templates/view_ticket.html", SkeletonParams{
@@ -159,13 +196,10 @@ func Run(ctx *cli.Context) {
 	// Reloads templates if built with debug
 	r.Use(TemplateReloader)
 	r.HTMLRender = &TemplateRenderer{Template:LoadTemplates()}
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "Pong")
-	})
 	r.GET("/js/data.js", app.StaticData)
 	r.GET("/ticket/:id", app.GetTicket)
 	r.GET("/ticket", app.ListTickets)
-	r.POST("/ticket/new", app.NewTicket)
+	r.POST("/ticket/:id", app.NewTicketComment)
 	r.ServeFiles("/static/*filepath",
 		&assetfs.AssetFS{Asset:Asset,AssetDir:AssetDir,Prefix:"static"})
 	r.Run(":8082")

@@ -16,16 +16,16 @@
     </tr>
     <tr>
       <th><label for="status">Status</label></th>
-      <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.substatus)">
+      <td><select name="status" onchange="Hier.sync_resolutions(this, this.form.resolution)">
         <option value="">---</option>
-{{range $name, $substatus := .Statuses}}\
+{{range $name, $resolution := .Statuses}}\
         <option value="{{$name}}">{{$name}}</option>
 {{end}}\
       </select></td>
     </tr>
     <tr class="hider" hidden>
-      <th><label for="substatus">Resolution</label></th>
-      <td><select name="substatus"></select></td>
+      <th><label for="resolution">Resolution</label></th>
+      <td><select name="resolution"></select></td>
     </tr>
     <tr>
       <th><label for="message">Message</label></th>
