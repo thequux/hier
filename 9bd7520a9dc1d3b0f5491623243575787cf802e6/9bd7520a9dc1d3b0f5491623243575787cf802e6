@@ -1,0 +1,5 @@
+
+'Get rid of TicketId in ticket interfaceTechnical Debt"New*ÄTicket IDs should be represented as simple strings in the interface.
+
+This introduces a potential new error in ticket-handling functions, but this error will generally be handled the same way as the ticket not being found. In return for this (small) bit of added complexity, we get the ability to use truncated ticket IDs.2*
+	TQ Hirschthequux@upstandinghackers.com:2015-01-12T11:59:38-06:00H
